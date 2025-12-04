@@ -15,12 +15,12 @@ export default function DashboardScreen({ navigation, route }: any) {
   const [recommendation, setRecommendation] = useState<string>("--");
   const [pendingSync, setPendingSync] = useState<number>(0);
 
-  
+
   const [weeklyAvg, setWeeklyAvg] = useState("--");
   const [weeklyWorkouts, setWeeklyWorkouts] = useState("--");
   const [weeklyRestDays, setWeeklyRestDays] = useState("--");
 
-  
+ 
   const [overtrainingRisk, setOvertrainingRisk] = useState("--");
 
   const getRecommendation = (score: number) => {
@@ -63,7 +63,7 @@ export default function DashboardScreen({ navigation, route }: any) {
     }
   };
 
-  
+  // ⭐ WEEKLY SUMMARY + OVERTRAINING RISK (Option A added)
   const loadWeeklySummary = async () => {
     try {
       const historyStr = await AsyncStorage.getItem("CHECKIN_HISTORY");
@@ -86,7 +86,7 @@ export default function DashboardScreen({ navigation, route }: any) {
 
         setWeeklyAvg(avg.toFixed(1));
 
-        
+      
         let risk = "--";
 
         const wStr = await AsyncStorage.getItem("WORKOUT_HISTORY");
@@ -113,7 +113,7 @@ export default function DashboardScreen({ navigation, route }: any) {
         setOvertrainingRisk("--");
       }
 
-      
+     
       const workoutStr = await AsyncStorage.getItem("WORKOUT_HISTORY");
       if (workoutStr) {
         const workouts = JSON.parse(workoutStr);
@@ -228,7 +228,7 @@ export default function DashboardScreen({ navigation, route }: any) {
         <Text style={styles.cardSubtitle}>Rest Days: {weeklyRestDays}</Text>
       </View>
 
-      {/*  OVERTRAINING RISK (option A) */}
+      {/* ⭐ OVERTRAINING RISK (option A) */}
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Overtraining Risk</Text>
         <Text style={styles.cardValue}>{overtrainingRisk}</Text>
